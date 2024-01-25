@@ -39,7 +39,7 @@ app.get("/players/", async (request, response) => {
   const getAllPlayers = `
     SELECT 
       * 
-     FROM player 
+     FROM player_details 
     ORDER BY player_id`;
   const playersArray = await db.all(getAllPlayers);
   const result = playersArray.map((eachPlayer) => {
@@ -69,7 +69,7 @@ app.put("/players/:playerId/", async (request, response) => {
   const { playerName } = playersDetails;
   const updatePlayerQuery = `
   UPDATE player_details 
-   SET player_name=${playerName}
+   SET player_name='${playerName}'
    WHERE player_id=${playerId}`;
   await db.run(updatePlayerQuery);
   response.send("Player Details Updated");
